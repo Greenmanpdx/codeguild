@@ -18,5 +18,6 @@ while i < len(word_list):
     if '{' in word_list[i]:
         word = ''.join(word_list[i])
         word_list[i] = ad_lib(word)
-    i = i + 1
+    i += 1
+
 print('Your story: /n', ' '.join(word_list))

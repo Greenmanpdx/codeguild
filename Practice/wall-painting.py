@@ -1,8 +1,7 @@
 """Wall Painting practice excercise"""
 import math
-
-cost = 0
-totalarea = 0.0
+SQ_FT_PER_GALLON = 400
+total_sqft = 0.0  # has to be initialized or else we can't add to it later
 again = True
 while again:
     print('What is the width of your wall in feet? ')
@@ -10,20 +9,17 @@ while again:
     print('What is the height of your wall in feet')
     height = float(input())
 
-    area = width * height
-    totalarea = totalarea + area
+    wall_sqft = width * height
+    total_sqft += wall_sqft  # keeps a running total
     print('Do you wish to enter another wall?')
     selection = input()
     if selection == 'n':
         again = False
-        break
-    #else:
-    #    again == True
 
 print('How much does the paint cost per gallon?')
 price = float(input())
 print('How many coats of paint do you want?')
-coats = int(input())
-cost = cost + math.ceil(totalarea/400) * price * coats
+coats_paint = int(input())
+cost_dollars = math.ceil(total_sqft / SQ_FT_PER_GALLON) * price * coats_paint
 
-print('It will cost $' + str(cost))
+print('It will cost ${:.2f}'.format(cost_dollars))
