@@ -1,1 +1,9 @@
-You're walking along the {place} when you come a cross a brass {noun}.
+I was walking along the {place} when I came a cross this {adverb} {noun}.
+I {verb_past_tense} it up and gave it {number} {plural_verb}.
+Out {verb_past_tense} this {noun} and said "I'll grant you {number} {noun_plural}
+{person}"
+"There are three {plural_noun},
+{number} can't {verb} from the {adjective},
+{number} can't {verb} anyone {verb} in {noun},
+{number} no asking for more wishes.
+I {past_tense_verb} "I want to be the {noun}"

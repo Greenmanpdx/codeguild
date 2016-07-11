@@ -1,32 +1,22 @@
 """Mad Libs"""
+#import pdb
 
 baseText = open('madlib.txt', 'r')
 
-original = baseText.read()
-fin_story = ''
+original = baseText.read(500)
+
+word_list = original.split()
 
 
 def ad_lib(word):
-    phrase = input('Please enter a ', +word)
+    print('Please enter a ')
+    print(word)
+    phrase = input()
     return phrase
-
-index = 0
-while index < len(original):
-    letter = original[index]
-    if letter == '{':
-        word = ''
-        ++index
-        wletter = ''
-        while wletter != '}':
-            wletter = original[index]
-            word = word + wletter
-            ++original[index]
-            phrase = ad_lib(word)
-        k = 0
-        while k < len(phrase):
-            fin_story = fin_story + phrase[k]
-    ++index
-
-    fin_story += original[index]
-
-print('Your story: /n' + fin_story)
+i = 0
+while i < len(word_list):
+    if '{' in word_list[i]:
+        word = ''.join(word_list[i])
+        word_list[i] = ad_lib(word)
+    i = i + 1
+print('Your story: /n', ' '.join(word_list))
