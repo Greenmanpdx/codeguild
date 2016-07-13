@@ -1,15 +1,19 @@
 """Black Jack"""
 
-def take_cards_from_user():
-    print('Black Jack Advice\n Enter a card\n')
+def take_card1_from_user():
+    print('Enter a card\n')
     print('Options are: 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K or A.')
     card1 = input()
+    return card1
 
+
+def take_card2_from_user():
     print('What is your second card?')
     card2 = input()
+    return card2
 
 
-def evaluate_cards(card1, card2)
+def evaluate_cards(card1, card2):
     ace1 = False
     ace2 = False
     if card1 == 'J' or card1 == 'K' or card1 == 'Q':
@@ -50,10 +54,14 @@ def show_advice(total):
         print('stay')
     if total == 21:
         print('Blackjack!')
-    #
-    # print('\nCard 1: ', card1)
-    # print('Card 2: ', card2)
-    # print('score1: ', score1)
-    # print('score2: ', score2)
-    # print('ace1: ', ace1)
-    # print('ace2: ', ace2)
+
+def main():
+    print('Black Jack Advice\n')
+    card1 = take_card1_from_user()
+    card2 = take_card2_from_user()
+    total_score = evaluate_cards(card1, card2)
+    show_advice(total_score)
+
+
+main()
+   
