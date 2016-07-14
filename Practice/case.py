@@ -1,4 +1,6 @@
 """case"""
+import re
+
 
 def get_input():
     """
@@ -37,114 +39,48 @@ def test_format(word):
 
 
 
-def snake_to_camel(word):
+
+def make_list(case, word):
+    if case == 'snake':
+        word_list = word.split('_')
+    elif case == 'camel':
+        word_list = re.findall('[A-Z][^A-Z]*', word)
+    elif case == 'kebob':
+        word_list = word.split('-')
+    else:
+        word = word.lower()
+        word_list = word.split('_')
+    return word_list
+
+
+
+
+def output_formatted_words(word_list):
     """
-    snake_to_camel('my_word')
-    'myWord'
 
+    >>> output_formatted_words(['this', 'is', 'a', 'test'])
+    snake: this_is_a_test
+    kebob: this-is-a-test
+    camel: ThisIsATest
+    constant: THIS_IS_A_TEST
 
-    :param word:
+    :param word_list:
     :return:
     """
-
-    count = 0
-    for index in range(len(word)):
-        if word[index] == '_':
-            count += 1
-    size = len(word) - count
-    for index in range(size):
-        if word[index] == '_':
-                word = word[:index] + word[index+1:].capitalize()
-    return word
-
-
-def camel_to_snake(word):
-        """
-        camel_to_snake('myWord')
-        'my_word'
-
-        :param word:
-        :return:
-        """
-
-        count = 0
-        for index in range(len(word)):
-            if word[index].isupper():
-                count += 1
-            size = len(word) + (count-1)
-            for index in range(size):
-                if word[index].isupper():
-                    word = word[:index] + '_' + word[index].lower() + word[index+1:]
-        return word
-
-def kebob_to_snake(word):
-    """
-    kebob_to_snake('my-word')
-    'my_word'
-
-    :param word:
-    :return:
-    """
-    return word.replace('-', '_')
-
-
-def snake_to_kebob(word):
-    return word.replace('_', '-')
-
-def constant_to_snake(word):
-    """
-    constant_to_snake('MY_WORD')
-    'my_world'
-    :param word:
-    :return:
-    """
-    return word.lower()
-
-def snake_to_constant(word):
-    """
-
-    snake_to_constant('my_word')
-    'MY_WORLD'
-
-    :param word:
-    :return:
-    """
-    return word.upper()
-
-
-
-def output_formatted_words(snake, camel, kebob, constant):
-    print('snake: ' + snake)
-    print('camel: ' + camel)
-    print('kebob: ' + kebob)
-    print('constant: ' + constant)
+    print('snake: ' + '_'.join(word_list))
+    print('kebob: ' + '-'.join(word_list))
+    word_list = [element.title() for element in word_list]
+    print('camel: ' + ''.join(word_list))
+    print('constant: ' + ('_'.join(word_list)).upper())
 
 
 def main():
     word = get_input()
     case = test_format(word)
-    if case == 'snake':
-        snake = word;
-        camel = snake_to_camel(word)
-        kebob = snake_to_kebob(word)
-        constant = snake_to_constant(word)
-    elif case == 'camel':
-        camel = word
-        snake = camel_to_snake(word)
-        kebob = snake_to_kebob(snake)
-        constant = snake_to_constant(snake)
-    elif case == 'kebob':
-        kebob = word
-        snake = kebob_to_snake(kebob)
-        camel = snake_to_camel(snake)
-        constant = snake_to_constant(snake)
-    else:
-        constant = word
-        snake = constant_to_snake(constant)
-        camel = snake_to_camel(snake)
-        kebob = snake_to_kebob(snake)
+    word_list = make_list(case, word)
 
-    output_formatted_words(snake, camel, kebob, constant)
+
+    output_formatted_words(word_list)
 
 
 main()
