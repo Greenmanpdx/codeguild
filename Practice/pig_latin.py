@@ -9,6 +9,13 @@ def convert_to_list(sentence):
 
 
 def move_letters(word, index):
+    """
+    Checks for punctuation then moves letters around and adds ay
+
+    :param word:
+    :param index:
+    :return:
+    """
     letters_to_move = word[:index]
 
     if word[-1] in PUNCTUATION:
@@ -16,7 +23,7 @@ def move_letters(word, index):
         end_of_word = word[index:-1]
         word = end_of_word + letters_to_move.lower() + 'ay' + punctuation
     else:
-        end_of_word = word[index:-1]
+        end_of_word = word[index:]
         word = end_of_word + letters_to_move.lower() + 'ay'
     return word
 
@@ -25,26 +32,34 @@ def find_index_of_first_vowel(word):
     """Returns the index of the first vowel in the word"""
     if word[0] in FIRST_LETTER_VOWELS:
         return 0
-    elif word[1] in FIRST_LETTER_VOWELS:
+    elif word[1] in OTHER_LETTER_VOWELS:
         return 1
-    elif word[2] in FIRST_LETTER_VOWELS:
+    elif word[2] in OTHER_LETTER_VOWELS:
         return 2
     else:
         return 3
 
 
 def convert_to_pig_latin(word_list):
-    """takes a list of words, converts the words to pig latin, then rejoins them into a sentence"""
-    for index in range(len(word_list)):
-        first_vowel_index = find_index_of_first_vowel(word_list[index])
-        word_list[index] = move_letters(word_list[index], first_vowel_index)
+    """
+    takes a list of words, converts the words to pig latin, then rejoins them into a sentence
 
-    return word_list
+   
+    """
+    formatted_word_list = [move_letters(x, find_index_of_first_vowel(x)) for x in word_list ]
+
+    return formatted_word_list
 
 
 def convert_list_to_string(pig_latin_list):
+    """
+    converts a list into a string
+    :param pig_latin_list:
+    :return:
+    """
     sentence = ' '.join(pig_latin_list)
     return sentence
+
 
 def input_sentence():
     """Prompt the user for a sentence"""
@@ -55,7 +70,7 @@ def input_sentence():
 
 def output_sentence(sentence, pig_latin_sentence):
     """Give the user the finished Pig Latin sentence"""
-    print(sentence + ' in Pig Latin is ' + pig_latin_sentence)
+    print('{} in pig latin is {}'.format(sentence, pig_latin_sentence))
 
 
 def main():
