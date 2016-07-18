@@ -10,7 +10,7 @@ def get_input():
     return input()
 
 
-def test_format(word):
+def test_for_format_type(word):
     """
 
     >>> test_format('my_word')
@@ -77,32 +77,73 @@ def make_list(case, word):
 
 
 
-def output_formatted_words(word_list):
-    """
+def output_formatted_word(snake, camel, kebob, constant):
 
-    >>> output_formatted_words(['this', 'is', 'a', 'test'])
-    snake: this_is_a_test
-    kebob: this-is-a-test
-    camel: ThisIsATest
-    constant: THIS_IS_A_TEST
+    print('Snake: ' + snake)
+    print('Camel: ' + camel)
+    print('Kebob: ' + kebob)
+    print('Constant' + constant)
+
+def set_snake(word_list):
+    """
+    >>> set_snake(['this', 'is', 'a', 'test'])
+    'this_is_a_test'
 
     :param word_list:
-    :return:
+    :return: snake as a string
     """
-    print('snake: ' + '_'.join(word_list))
-    print('kebob: ' + '-'.join(word_list))
+    snake = ('snake: ' + '_'.join(word_list))
+    return snake
+
+
+def set_kebob(word_list):
+    """
+    >>> set_kebob(['this', 'is', 'a', 'test'])
+    'this-is-a-test'
+
+    :param word_list:
+    :return: kebob as a string
+    """
+    kebob = 'kebob: ' + '-'.join(word_list)
+    return kebob
+
+
+def set_camel(word_list):
+    """
+       >>> camel(['this', 'is', 'a', 'test'])
+       'ThisIsATest'
+
+       :param word_list:
+       :return: camel as a string
+       """
     word_list = [element.title() for element in word_list]
-    print('camel: ' + ''.join(word_list))
-    print('constant: ' + ('_'.join(word_list)).upper())
+    camel = 'camel: ' + ''.join(word_list)
+    return camel
+
+
+def set_constant(word_list):
+    """
+    >>> set_constant(['this', 'is', 'a', 'test'])
+    'THIS_IS_A_TEST'
+
+    :param word_list:
+    :return: constant as a string
+    """
+    constant = 'constant: ' + ('_'.join(word_list)).upper()
+    return constant
 
 
 def main():
     word = get_input()
-    case = test_format(word)
+    case = test_for_format_type(word)
     word_list = make_list(case, word)
 
+    snake = set_snake(word_list)
+    kebob = set_kebob(word_list)
+    camel = set_camel(word_list)
+    constant = set_constant(word_list)
 
-    output_formatted_words(word_list)
+    output_formatted_word(snake, camel, kebob, constant)
 
 
 if __name__ == '__main__':
