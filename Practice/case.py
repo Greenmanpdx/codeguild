@@ -4,7 +4,8 @@ import re
 
 def get_input():
     """
-    Takes the input from the user"""
+    Takes the input from the user
+    """
     print('Please enter a word to be formatted:')
     return input()
 
@@ -25,7 +26,7 @@ def test_format(word):
     'constant'
 
     :param word:
-    :return:
+    :return: the case as a string
     """
     if '_' in word:
         if word.isupper():
@@ -41,10 +42,31 @@ def test_format(word):
 
 
 def make_list(case, word):
+    """
+
+>>> make_list('snake', 'this_is_a_test')
+['this', 'is', 'a', 'test']
+
+>>> make_list('camel', 'ThisIsATest')
+['this', 'is', 'a', 'test']
+
+>>> make_list('kebob', 'this-is-a-test')
+['this', 'is', 'a', 'test']
+
+>>> make_list('constant', 'THIS_IS_A_TEST')
+['this', 'is', 'a', 'test']
+
+    :param case:
+    :param word:
+    :return:
+    """
     if case == 'snake':
         word_list = word.split('_')
     elif case == 'camel':
-        word_list = re.findall('[A-Z][^A-Z]*', word)
+        word_list = []
+        capitalized_word_list = re.findall('[A-Z][^A-Z]*', word)
+        for W in capitalized_word_list:
+            word_list.append(W.lower())
     elif case == 'kebob':
         word_list = word.split('-')
     else:
@@ -83,4 +105,5 @@ def main():
     output_formatted_words(word_list)
 
 
-main()
+if __name__ == '__main__':
+    main()
