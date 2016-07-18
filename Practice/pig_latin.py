@@ -2,6 +2,8 @@
 FIRST_LETTER_VOWELS = 'AEIOUaeiou'
 OTHER_LETTER_VOWELS = 'aeiouy'
 PUNCTUATION = ' ,_-.?!:;'
+
+
 def convert_to_list(sentence):
     """Takes a sentence and converts into a list"""
     word_list = sentence.split()
@@ -14,17 +16,13 @@ def move_letters(word, index):
 
     :param word:
     :param index:
-    :return:
+    :return: word:
     """
-    letters_to_move = word[:index]
-
     if word[-1] in PUNCTUATION:
-        punctuation = word[-1]
-        end_of_word = word[index:-1]
-        word = end_of_word + letters_to_move.lower() + 'ay' + punctuation
+        word = '{}{} ay {}'.format(word[index:-1], word[:index].lower(), word[-1])
+
     else:
-        end_of_word = word[index:]
-        word = end_of_word + letters_to_move.lower() + 'ay'
+        word = word[index:] + word[:index].lower() + 'ay'
     return word
 
 
@@ -42,11 +40,15 @@ def find_index_of_first_vowel(word):
 
 def convert_to_pig_latin(word_list):
     """
-    takes a list of words, converts the words to pig latin, then rejoins them into a sentence
-
-   
+    takes a list of words, converts the words to pig latin,
+    then rejoins them into a sentence
+    :param word_list:
+    :return: formatted_word_list:
     """
-    formatted_word_list = [move_letters(x, find_index_of_first_vowel(x)) for x in word_list ]
+    formatted_word_list = [
+        move_letters(x, find_index_of_first_vowel(x))
+        for x in word_list
+        ]
 
     return formatted_word_list
 
@@ -55,7 +57,7 @@ def convert_list_to_string(pig_latin_list):
     """
     converts a list into a string
     :param pig_latin_list:
-    :return:
+    :return: sentence:
     """
     sentence = ' '.join(pig_latin_list)
     return sentence
